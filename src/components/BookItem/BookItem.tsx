@@ -1,9 +1,7 @@
 import {
-  Button,
   Box,
   Heading,
   Link,
-  Text,
   Flex,
   Image,
   Wrap,
@@ -39,13 +37,17 @@ const BookItem = ({
   const [isFavourite, setIsFavourite] = useState(false);
 
   const image = resources.filter(
-    (element) => element.type === "image/jpeg" && element.uri.includes("small"),
+    (element) =>
+      element.type === "image/jpeg" && element.uri?.includes("small"),
   );
 
   return (
     <Flex p={4} borderWidth={2} align="center" justify="space-between">
       <Flex>
-        <Image src={image[0].uri} mr={6} />
+        <Box minWidth={70} mr={6}>
+          {image[0] && <Image alt={`${id}`} src={image[0]?.uri} />}
+        </Box>
+
         <Box>
           <Box>{parseAgents(agents)}</Box>
           <Heading size="md" my="2">
@@ -54,15 +56,17 @@ const BookItem = ({
             </Link>
 
             {languages.map((text) => (
-              <Tag variant="solid" bgColor="black">
+              <Tag key={text} variant="solid" bgColor="black">
                 <TagLabel>{text.toUpperCase()}</TagLabel>
               </Tag>
             ))}
           </Heading>
+
           <Box fontSize={12}>{`${downloads} downloads`}</Box>
+
           <Wrap mt={4} spacing={2}>
             {bookshelves.map((text) => (
-              <Tag variant="solid" bgColor="gba.yellow.500">
+              <Tag key={text} variant="solid" bgColor="gba.yellow.500">
                 <TagLabel>{text}</TagLabel>
               </Tag>
             ))}

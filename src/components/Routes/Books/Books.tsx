@@ -1,9 +1,17 @@
-import { Flex, Heading, Stack, Spinner, Divider } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Stack,
+  Spinner,
+  Divider,
+  Center,
+} from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { fetchBooksList } from "../../../queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { roundNumberOfPages } from "../../../utilities";
 import BookItem from "../../BookItem/BookItem";
+import Pagination from "../../Pagination/Pagination";
 
 const Books = () => {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -14,8 +22,12 @@ const Books = () => {
   );
 
   const [fullNumberOfPages, setFullNumberOfPages] = useState(
-    roundNumberOfPages(data?.count, 10),
+    roundNumberOfPages(1, 10),
   );
+
+  useEffect(() => {
+    if (data?.count) setFullNumberOfPages(roundNumberOfPages(data.count, 10));
+  }, [data]);
 
   console.log(data, fullNumberOfPages);
 
@@ -29,9 +41,18 @@ const Books = () => {
 
       <Divider />
 
-      <Stack p={4}>
+      <Pagination
+        setCurrentPageNumber={setCurrentPageNumber}
+        currentPageNumber={currentPageNumber}
+        fullNumberOfPages={fullNumberOfPages}
+      />
+
+      <Stack p={4} overflowY="scroll" w="100%" h={"calc(100vh - 74px - 128px)"}>
         {status !== "success" ? (
-          <Spinner size="md" />
+          <Center>
+            Loading
+            <Spinner ml={4} size="md" />
+          </Center>
         ) : (
           data?.results?.map((book) => (
             <BookItem
