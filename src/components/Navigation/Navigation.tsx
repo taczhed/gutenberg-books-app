@@ -6,7 +6,7 @@ import { ImBooks } from "react-icons/im";
 
 const Navigation = () => {
   return (
-    <GridItem rowStart={[0, 1]} bg="gba.yellow">
+    <GridItem rowStart={[0, 1]} bg="gba.yellow.500">
       <Stack direction={["row", "column"]} align="center" h="full">
         <Logo />
         <NavigationButton text="Home" icon={AiFillHome} link="/" />

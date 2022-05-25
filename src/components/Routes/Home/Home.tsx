@@ -1,7 +1,6 @@
-import { Flex, Heading, Image, Stack, Button, Icon } from "@chakra-ui/react";
+import { Flex, Heading, Image, Stack, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import HomeImage from "./HomeImage.svg";
-import { MdFavoriteBorder } from "react-icons/md";
 
 const Home = () => {
   return (
@@ -27,14 +26,6 @@ const Home = () => {
           </Link>
         </Stack>
         <Image src={HomeImage} w={[128, 164, 256]} />
-      </Flex>
-
-      <Flex p={[10, 12]} bgColor="gba.peach" h="auto">
-        <Heading size={["md", "lg"]} color="white">
-          <Icon as={MdFavoriteBorder} mr={4} mb={-1} />
-          Your marked books
-          <Icon as={MdFavoriteBorder} ml={4} mb={-1} />
-        </Heading>
       </Flex>
     </Flex>
   );
