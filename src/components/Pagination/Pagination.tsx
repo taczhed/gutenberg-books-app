@@ -30,7 +30,7 @@ const Pagination = ({
   }, [currentPageNumber]);
 
   return (
-    <Flex justify="center" align="center" direction="row" p={4} boxShadow="md">
+    <Flex justify="center" align="center" direction="row" p={2} boxShadow="md">
       <PaginationButton
         isDisabled={currentPageNumber === 1}
         icon={MdChevronLeft}

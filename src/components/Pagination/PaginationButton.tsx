@@ -16,17 +16,15 @@ const PaginationButton = ({
 }: PaginationButtonProps) => {
   return (
     <Button
+      size="xs"
       disabled={isDisabled}
       leftIcon={
         typeof icon !== "number" ? (
           <Icon as={icon} fontSize={[24]} ml={2} color="white" />
         ) : undefined
       }
-      fontSize={[12]}
       bgColor="gba.yellow.500"
       mx={1}
-      w={10}
-      h={10}
       _hover={{ bgColor: "gba.yellow.400" }}
       _active={{ bgColor: "gba.yellow.600" }}
       _focus={{ border: 0 }}

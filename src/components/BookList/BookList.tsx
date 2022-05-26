@@ -5,10 +5,11 @@ import Pagination from "../Pagination/Pagination";
 
 interface BooksListProps {
   data: any;
-  status: "idle" | "error" | "loading" | "success";
+  status: string;
   currentPageNumber: number;
   fullNumberOfPages: number;
   setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  h?: string | string[];
 }
 
 const BooksList = ({
@@ -17,6 +18,7 @@ const BooksList = ({
   currentPageNumber,
   fullNumberOfPages,
   setCurrentPageNumber,
+  h,
 }: BooksListProps) => {
   const [favourites, setFavourites] = useState<Array<number>>([]);
   const [areFavouritesMutable, setAreFavouritesMutable] = useState(false);
@@ -40,15 +42,10 @@ const BooksList = ({
         fullNumberOfPages={fullNumberOfPages}
       />
 
-      <Stack
-        p={4}
-        overflowY="scroll"
-        w="100%"
-        h={["calc(100vh - 96px - 74px - 64px)", "calc(100vh - 74px - 128px)"]}
-      >
-        {status !== "success" ? (
+      <Stack p={4} overflowY="scroll" w="100%" h={h}>
+        {status === "loading" ? (
           <Center>
-            Loading
+            We are looking for books...
             <Spinner ml={4} size="md" />
           </Center>
         ) : (

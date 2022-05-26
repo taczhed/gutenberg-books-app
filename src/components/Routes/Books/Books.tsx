@@ -22,7 +22,7 @@ const Books = () => {
 
   return (
     <Flex direction="column">
-      <Flex p={[8, 10]} justify="space-between" bgColor="gba.yellow.600">
+      <Flex p={[4, 6]} justify="space-between" bgColor="gba.yellow.600">
         <Heading color="white" size={["lg", "2xl"]} textAlign="center">
           Books
         </Heading>
@@ -36,6 +36,7 @@ const Books = () => {
         currentPageNumber={currentPageNumber}
         fullNumberOfPages={fullNumberOfPages}
         setCurrentPageNumber={setCurrentPageNumber}
+        h={["calc(100vh - 40px - 74px - 64px)", "calc(100vh - 42px - 96px)"]}
       />
     </Flex>
   );
