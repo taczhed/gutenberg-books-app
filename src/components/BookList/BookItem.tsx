@@ -11,9 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { parseAgents } from "../../utilities";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { useState } from "react";
 
 interface BookItemProps {
+  isFavourite: boolean;
   id: number;
   title: string;
   agents: Array<{ id: number; person: string; type: string }>;
@@ -22,9 +22,11 @@ interface BookItemProps {
   languages: string[];
   resources: Array<{ id: number; uri: string; type: string }>;
   bookshelves: string[];
+  setFavourites: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 const BookItem = ({
+  isFavourite,
   id,
   title,
   agents,
@@ -33,9 +35,8 @@ const BookItem = ({
   languages,
   resources,
   bookshelves,
+  setFavourites,
 }: BookItemProps) => {
-  const [isFavourite, setIsFavourite] = useState(false);
-
   const image = resources.filter(
     (element) =>
       element.type === "image/jpeg" && element.uri?.includes("small"),
@@ -77,9 +78,13 @@ const BookItem = ({
       <Flex direction="column" align="center">
         <Icon
           as={isFavourite ? MdFavorite : MdFavoriteBorder}
+          color={isFavourite ? "gba.warm" : "black"}
           fontSize={28}
+          onClick={() => {
+            if (!isFavourite) setFavourites((prev) => [...prev, id]);
+            else setFavourites((prev) => prev.filter((value) => value !== id));
+          }}
           _hover={{ cursor: "pointer" }}
-          onClick={() => setIsFavourite((prev) => !prev)}
         />
       </Flex>
     </Flex>

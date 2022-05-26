@@ -21,7 +21,7 @@ const Home = () => {
               color="gray.400"
               _focus={{ border: 0 }}
             >
-              Show he books!
+              Show me books!
             </Button>
           </Link>
         </Stack>

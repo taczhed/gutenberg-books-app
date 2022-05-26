@@ -1,35 +1,24 @@
-import {
-  Flex,
-  Heading,
-  Stack,
-  Spinner,
-  Divider,
-  Center,
-} from "@chakra-ui/react";
+import { Flex, Heading, Divider } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { fetchBooksList } from "../../../queries";
 import { useEffect, useState } from "react";
 import { roundNumberOfPages } from "../../../utilities";
-import BookItem from "../../BookItem/BookItem";
-import Pagination from "../../Pagination/Pagination";
+import BookList from "../../BookList/BookList";
 
 const Books = () => {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [fullNumberOfPages, setFullNumberOfPages] = useState(
+    roundNumberOfPages(1, 10),
+  );
 
   const { data, status } = useQuery(
     ["booksList", currentPageNumber],
     fetchBooksList,
   );
 
-  const [fullNumberOfPages, setFullNumberOfPages] = useState(
-    roundNumberOfPages(1, 10),
-  );
-
   useEffect(() => {
     if (data?.count) setFullNumberOfPages(roundNumberOfPages(data.count, 10));
   }, [data]);
-
-  console.log(data, fullNumberOfPages);
 
   return (
     <Flex direction="column">
@@ -41,34 +30,13 @@ const Books = () => {
 
       <Divider />
 
-      <Pagination
-        setCurrentPageNumber={setCurrentPageNumber}
+      <BookList
+        data={data}
+        status={status}
         currentPageNumber={currentPageNumber}
         fullNumberOfPages={fullNumberOfPages}
+        setCurrentPageNumber={setCurrentPageNumber}
       />
-
-      <Stack p={4} overflowY="scroll" w="100%" h={"calc(100vh - 74px - 128px)"}>
-        {status !== "success" ? (
-          <Center>
-            Loading
-            <Spinner ml={4} size="md" />
-          </Center>
-        ) : (
-          data?.results?.map((book) => (
-            <BookItem
-              key={book.id}
-              id={book.id}
-              title={book.title}
-              agents={book.agents}
-              description={book.description}
-              downloads={book.downloads}
-              languages={book.languages}
-              resources={book.resources}
-              bookshelves={book.bookshelves}
-            />
-          ))
-        )}
-      </Stack>
     </Flex>
   );
 };
