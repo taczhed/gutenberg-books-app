@@ -17,15 +17,23 @@ const SearchInput = ({ placeholder, searchForResult }: SearchInputProps) => {
   const [searchInputValue, setSearchInputValue] = useState("");
 
   return (
-    <InputGroup size="sm" borderWidth={2}>
+    <InputGroup size="md" borderRadius={10}>
       <Input
+        p={2}
         placeholder={placeholder}
         value={searchInputValue}
         onChange={(e) => setSearchInputValue(e.target.value)}
+        _focus={{ borderColor: "gba.yellow.600" }}
       />
       <InputRightElement>
         <Button
+          mr={1}
           size="sm"
+          bgColor="gba.yellow.500"
+          _hover={{ bgColor: "gba.yellow.400" }}
+          _active={{ bgColor: "gba.yellow.600" }}
+          _focus={{ border: 0 }}
+          color="white"
           leftIcon={<Icon ml={2} as={HiSearch} />}
           onClick={() => searchForResult(searchInputValue)}
         ></Button>

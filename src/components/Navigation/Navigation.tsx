@@ -1,8 +1,9 @@
 import { GridItem, Stack } from "@chakra-ui/react";
 import Logo from "./Logo/Logo";
 import NavigationButton from "./NavigationButton/NavigationButton";
-import { AiFillHome, AiOutlineSearch } from "react-icons/ai";
+import { AiFillHome } from "react-icons/ai";
 import { ImBooks } from "react-icons/im";
+import { MdFavorite } from "react-icons/md";
 
 const Navigation = () => {
   return (
@@ -11,7 +12,11 @@ const Navigation = () => {
         <Logo />
         <NavigationButton text="Home" icon={AiFillHome} link="/" />
         <NavigationButton text="Books" icon={ImBooks} link="/books" />
-        <NavigationButton text="Search" icon={AiOutlineSearch} link="/search" />
+        <NavigationButton
+          text="Favourites"
+          icon={MdFavorite}
+          link="/favourites"
+        />
       </Stack>
     </GridItem>
   );

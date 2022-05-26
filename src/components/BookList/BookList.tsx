@@ -1,4 +1,4 @@
-import { Center, Spinner, Stack } from "@chakra-ui/react";
+import { Center, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BookItem from "./BookItem";
 import Pagination from "../Pagination/Pagination";
@@ -9,6 +9,7 @@ interface BooksListProps {
   currentPageNumber: number;
   fullNumberOfPages: number;
   setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  disablePagination?: boolean;
   h?: string | string[];
 }
 
@@ -18,15 +19,17 @@ const BooksList = ({
   currentPageNumber,
   fullNumberOfPages,
   setCurrentPageNumber,
+  disablePagination,
   h,
 }: BooksListProps) => {
-  const [favourites, setFavourites] = useState<Array<number>>([]);
+  const [favourites, setFavourites] = useState<Array<any>>([]);
   const [areFavouritesMutable, setAreFavouritesMutable] = useState(false);
 
   useEffect(() => {
     if (areFavouritesMutable)
       localStorage.setItem("gba-user-favourites", JSON.stringify(favourites));
     if (!areFavouritesMutable) setAreFavouritesMutable(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favourites]);
 
   useEffect(() => {
@@ -36,11 +39,13 @@ const BooksList = ({
 
   return (
     <>
-      <Pagination
-        setCurrentPageNumber={setCurrentPageNumber}
-        currentPageNumber={currentPageNumber}
-        fullNumberOfPages={fullNumberOfPages}
-      />
+      {!disablePagination && (
+        <Pagination
+          setCurrentPageNumber={setCurrentPageNumber}
+          currentPageNumber={currentPageNumber}
+          fullNumberOfPages={fullNumberOfPages}
+        />
+      )}
 
       <Stack p={4} overflowY="scroll" w="100%" h={h}>
         {status === "loading" ? (
@@ -48,20 +53,15 @@ const BooksList = ({
             We are looking for books...
             <Spinner ml={4} size="md" />
           </Center>
+        ) : data.results.length === 0 ? (
+          <Text>We cannot find such books :(</Text>
         ) : (
           data?.results?.map((book) => (
             <BookItem
               key={book.id}
-              isFavourite={favourites.includes(book.id)}
-              id={book.id}
-              title={book.title}
-              agents={book.agents}
-              description={book.description}
-              downloads={book.downloads}
-              languages={book.languages}
-              resources={book.resources}
-              bookshelves={book.bookshelves}
+              isFavourite={favourites.some((favBook) => favBook.id === book.id)}
               setFavourites={setFavourites}
+              book={book}
             />
           ))
         )}

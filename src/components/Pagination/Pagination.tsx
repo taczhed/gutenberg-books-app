@@ -40,6 +40,7 @@ const Pagination = ({
       <HStack mx={2} spacing={1}>
         <Text>Page</Text>
         <NumberInput
+          _focus={{ border: 0 }}
           size="xs"
           maxW={20}
           value={numberInputValue}
@@ -48,7 +49,7 @@ const Pagination = ({
           onChange={(e) => setNumberInputValue(+e)}
           onBlur={(e) => setCurrentPageNumber(+e.target.value)}
         >
-          <NumberInputField />
+          <NumberInputField _focus={{ border: 0 }} />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />

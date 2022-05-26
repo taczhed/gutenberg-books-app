@@ -14,30 +14,12 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
 interface BookItemProps {
   isFavourite: boolean;
-  id: number;
-  title: string;
-  agents: Array<{ id: number; person: string; type: string }>;
-  description: string;
-  downloads: number;
-  languages: string[];
-  resources: Array<{ id: number; uri: string; type: string }>;
-  bookshelves: string[];
-  setFavourites: React.Dispatch<React.SetStateAction<number[]>>;
+  setFavourites: React.Dispatch<React.SetStateAction<any[]>>;
+  book: any;
 }
 
-const BookItem = ({
-  isFavourite,
-  id,
-  title,
-  agents,
-  description,
-  downloads,
-  languages,
-  resources,
-  bookshelves,
-  setFavourites,
-}: BookItemProps) => {
-  const image = resources.filter(
+const BookItem = ({ isFavourite, setFavourites, book }: BookItemProps) => {
+  const image = book.resources.filter(
     (element) =>
       element.type === "image/jpeg" && element.uri?.includes("small"),
   );
@@ -46,27 +28,28 @@ const BookItem = ({
     <Flex p={4} borderWidth={2} align="center" justify="space-between">
       <Flex>
         <Box minWidth={70} mr={6}>
-          {image[0] && <Image alt={`${id}`} src={image[0]?.uri} />}
+          {image[0] && <Image alt={`${book.id}`} src={image[0]?.uri} />}
         </Box>
 
         <Box>
-          <Box>{parseAgents(agents)}</Box>
+          <Box>{parseAgents(book.agents)}</Box>
+
           <Heading size="md" my="2">
             <Link href="#" mr={2}>
-              {title}
+              {book.title}
             </Link>
 
-            {languages.map((text) => (
+            {book.languages.map((text) => (
               <Tag key={text} variant="solid" bgColor="black">
                 <TagLabel>{text.toUpperCase()}</TagLabel>
               </Tag>
             ))}
           </Heading>
 
-          <Box fontSize={12}>{`${downloads} downloads`}</Box>
+          <Box fontSize={12}>{`${book.downloads} downloads`}</Box>
 
           <Wrap mt={4} spacing={2}>
-            {bookshelves.map((text) => (
+            {book.bookshelves.map((text) => (
               <Tag key={text} variant="solid" bgColor="gba.yellow.500">
                 <TagLabel>{text}</TagLabel>
               </Tag>
@@ -77,14 +60,17 @@ const BookItem = ({
 
       <Flex direction="column" align="center">
         <Icon
+          _hover={{ cursor: "pointer" }}
           as={isFavourite ? MdFavorite : MdFavoriteBorder}
           color={isFavourite ? "gba.warm" : "black"}
           fontSize={28}
           onClick={() => {
-            if (!isFavourite) setFavourites((prev) => [...prev, id]);
-            else setFavourites((prev) => prev.filter((value) => value !== id));
+            if (!isFavourite) setFavourites((prev) => [...prev, book]);
+            else
+              setFavourites((prev) =>
+                prev.filter((value) => value.id !== book.id),
+              );
           }}
-          _hover={{ cursor: "pointer" }}
         />
       </Flex>
     </Flex>

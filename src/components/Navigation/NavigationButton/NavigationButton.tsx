@@ -11,6 +11,7 @@ const NavigationButton = ({ text, icon, link }: NavigationButtonProps) => {
   return (
     <Link to={link}>
       <Button
+        w={[100, 156]}
         leftIcon={<Icon as={icon} />}
         size={["sm", "lg"]}
         px={[4, 10]}
