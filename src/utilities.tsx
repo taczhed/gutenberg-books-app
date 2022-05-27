@@ -10,6 +10,15 @@ export const parseAgents = (
   });
 };
 
+export const parseBookshelves = (bookshelvesArray: string[]) => {
+  let queryString = "";
+  bookshelvesArray.map((bookshelf, i) => {
+    if (i === 0) queryString += `${bookshelf}`;
+    else queryString += `&has_bookshelf=${bookshelf}`;
+  });
+  return queryString;
+};
+
 export const gbaScrollBar = {
   "&::-webkit-scrollbar": {
     width: "6px",

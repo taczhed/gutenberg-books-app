@@ -2,18 +2,20 @@ import { Divider, Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchBooksList } from "../../../queries";
-import { roundNumberOfPages } from "../../../utilities";
+import { parseBookshelves, roundNumberOfPages } from "../../../utilities";
 import BookList from "../../BookList/BookList";
 import SearchInput from "../../SearchInput/SearchInput";
+import TagFilter from "../../TagFilter/TagFilter";
 
 const Books = () => {
   const [searchText, setSearchText] = useState<undefined | string>();
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [bookshelves, setBookshelves] = useState<string[]>([]);
   const [fullNumberOfPages, setFullNumberOfPages] = useState(
     roundNumberOfPages(1, 10),
   );
   const { data, status } = useQuery(
-    ["booksList", currentPageNumber, searchText],
+    ["booksList", currentPageNumber, searchText, parseBookshelves(bookshelves)],
     fetchBooksList,
   );
 
@@ -34,11 +36,13 @@ const Books = () => {
         </Heading>
       </Flex>
 
-      <Flex align="center" p={4}>
+      <Flex align="center" direction="column" p={4}>
         <SearchInput
           placeholder={"Search..."}
           searchForResult={searchForResult}
         />
+
+        <TagFilter bookshelves={bookshelves} setBookshelves={setBookshelves} />
       </Flex>
 
       <Divider />
@@ -49,9 +53,11 @@ const Books = () => {
         currentPageNumber={currentPageNumber}
         fullNumberOfPages={fullNumberOfPages}
         setCurrentPageNumber={setCurrentPageNumber}
+        setBookshelves={setBookshelves}
+        bookshelves={bookshelves}
         h={[
-          "calc(100vh - 64px - 40px - 74px - 64px)",
-          "calc(100vh - 96px - 70px - 44px)",
+          "calc(100vh - 64px - 80px - 74px - 64px)",
+          "calc(100vh - 96px - 140px - 44px)",
         ]}
       />
     </Flex>
