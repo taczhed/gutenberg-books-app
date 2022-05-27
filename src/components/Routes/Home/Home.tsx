@@ -19,7 +19,7 @@ const Home = () => {
         <Heading color="white" size={["sm", "md"]} my={8}>
           This web app let users search and read books from Project Gutenberg
         </Heading>
-        <Link to="/gutenberg-books-app/books">
+        <Link to="/books">
           <Button
             py={8}
             px={16}

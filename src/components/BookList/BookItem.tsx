@@ -45,7 +45,7 @@ const BookItem = ({
           <Box>{parseAgents(book.agents)}</Box>
 
           <Heading size="md" my="2">
-            <Link href={`/gutenberg-books-app/desk/${book.id}`} mr={2}>
+            <Link href={`/desk/${book.id}`} mr={2}>
               {book.title}
             </Link>
 
