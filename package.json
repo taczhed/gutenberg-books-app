@@ -1,6 +1,7 @@
 {
+  "homepage": "http://taczhed.github.io/gutenberg-books-app",
   "name": "gutenberg-books-app",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.0",
@@ -28,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-dom": "^16.9.16"
+    "@types/react-dom": "^16.9.16",
+    "gh-pages": "^4.0.0"
   }
 }
