@@ -21,10 +21,12 @@ const Books = () => {
 
   const searchForResult = async (searchText: string) => {
     setCurrentPageNumber(1);
+    setFullNumberOfPages(1);
     setSearchText(searchText);
   };
 
   useEffect(() => {
+    console.log(data);
     if (data?.count) setFullNumberOfPages(roundNumberOfPages(data.count, 10));
   }, [data]);
 

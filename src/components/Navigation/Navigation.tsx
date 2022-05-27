@@ -10,12 +10,20 @@ const Navigation = () => {
     <GridItem rowStart={[0, 1]} bg="gba.yellow.500">
       <Stack direction={["row", "column"]} align="center" h="full">
         <Logo />
-        <NavigationButton text="Home" icon={AiFillHome} link="/" />
-        <NavigationButton text="Books" icon={ImBooks} link="/books" />
+        <NavigationButton
+          text="Home"
+          icon={AiFillHome}
+          link="/gutenberg-books-app"
+        />
+        <NavigationButton
+          text="Books"
+          icon={ImBooks}
+          link="/gutenberg-books-app/books"
+        />
         <NavigationButton
           text="Favourites"
           icon={MdFavorite}
-          link="/favourites"
+          link="/gutenberg-books-app/favourites"
         />
       </Stack>
     </GridItem>

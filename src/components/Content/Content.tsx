@@ -4,17 +4,19 @@ import Books from "../Routes/Books/Books";
 import Desk from "../Routes/Desk/Desk";
 import Favourites from "../Routes/Favourites/Favourites";
 import Home from "../Routes/Home/Home";
-import NotFound from "../Routes/NotFound/NotFound";
 
 const Content = () => {
   return (
     <GridItem rowStart={{ base: 1, md: 0 }}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/favourites" element={<Favourites />} />
-        <Route path="/desk/:bookid" element={<Desk />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/gutenberg-books-app" element={<Home />} />
+        <Route path="/gutenberg-books-app/books" element={<Books />} />
+        <Route
+          path="/gutenberg-books-app/favourites"
+          element={<Favourites />}
+        />
+        <Route path="/gutenberg-books-app/desk/:bookid" element={<Desk />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </GridItem>
   );
