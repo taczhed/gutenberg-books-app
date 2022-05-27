@@ -46,8 +46,14 @@ const Pagination = ({
           value={numberInputValue}
           min={1}
           max={fullNumberOfPages}
-          onChange={(e) => setNumberInputValue(+e)}
-          onBlur={(e) => setCurrentPageNumber(+e.target.value)}
+          onChange={(e) =>
+            +e >= 1 && +e <= fullNumberOfPages && setNumberInputValue(+e)
+          }
+          onBlur={(e) =>
+            +e.target.value >= 1 &&
+            +e.target.value <= fullNumberOfPages &&
+            setCurrentPageNumber(+e.target.value)
+          }
         >
           <NumberInputField _focus={{ border: 0 }} />
           <NumberInputStepper>

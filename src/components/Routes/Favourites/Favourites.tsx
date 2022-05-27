@@ -35,7 +35,7 @@ const Favourites = () => {
         fullNumberOfPages={1}
         setCurrentPageNumber={setCurrentPageNumber}
         disablePagination={true}
-        h={["calc(100vh)", "calc(100vh - 98px)"]}
+        h={["calc(100vh - 64px  - 66px)", "calc(100vh - 98px)"]}
       />
     </Flex>
   );

@@ -2,6 +2,7 @@ import { Center, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BookItem from "./BookItem";
 import Pagination from "../Pagination/Pagination";
+import { gbaScrollBar } from "../../utilities";
 
 interface BooksListProps {
   data: any;
@@ -47,7 +48,7 @@ const BooksList = ({
         />
       )}
 
-      <Stack p={4} overflowY="scroll" w="100%" h={h}>
+      <Stack p={4} overflowY="scroll" w="100%" h={h} css={gbaScrollBar}>
         {status === "loading" ? (
           <Center>
             We are looking for books...

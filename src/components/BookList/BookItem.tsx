@@ -35,7 +35,7 @@ const BookItem = ({ isFavourite, setFavourites, book }: BookItemProps) => {
           <Box>{parseAgents(book.agents)}</Box>
 
           <Heading size="md" my="2">
-            <Link href="#" mr={2}>
+            <Link href={`/desk/${book.id}`} mr={2}>
               {book.title}
             </Link>
 
