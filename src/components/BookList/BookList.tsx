@@ -2,7 +2,7 @@ import { Center, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BookItem from "./BookItem";
 import Pagination from "../Pagination/Pagination";
-import { gbaScrollBar } from "../../utilities";
+import { gbaScrollBar } from "../../scrollbar";
 
 interface BooksListProps {
   data: any;
