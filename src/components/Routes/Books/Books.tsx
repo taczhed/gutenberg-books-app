@@ -26,8 +26,10 @@ const Books = () => {
   };
 
   useEffect(() => {
-    console.log(data);
-    if (data?.count) setFullNumberOfPages(roundNumberOfPages(data.count, 10));
+    if (data?.count) {
+      setFullNumberOfPages(roundNumberOfPages(data.count, 10));
+      setCurrentPageNumber(1);
+    }
   }, [data]);
 
   return (
