@@ -19,14 +19,14 @@ interface BookItemProps {
   setFavourites: React.Dispatch<React.SetStateAction<any[]>>;
   book: any;
   bookshelves?: string[];
-  setBookshelves?: React.Dispatch<React.SetStateAction<string[]>>;
+  extendBookshelves?: (text: string) => void;
 }
 
 const BookItem = ({
   isFavourite,
   bookshelves,
   setFavourites,
-  setBookshelves,
+  extendBookshelves,
   book,
 }: BookItemProps) => {
   const image = book.resources.filter(
@@ -67,9 +67,7 @@ const BookItem = ({
                       as={AddIcon}
                       _hover={{ cursor: "pointer" }}
                       onClick={() =>
-                        setBookshelves &&
-                        !bookshelves?.includes(text) &&
-                        setBookshelves((prev) => [...prev, text])
+                        extendBookshelves && extendBookshelves(text)
                       }
                     />
                     <TagLabel>{text}</TagLabel>

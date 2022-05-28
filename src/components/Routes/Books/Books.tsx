@@ -25,10 +25,15 @@ const Books = () => {
     setSearchText(searchText);
   };
 
+  const extendBookshelves = (text: string) => {
+    if (!bookshelves?.includes(text)) setBookshelves((prev) => [...prev, text]);
+    setCurrentPageNumber(1);
+  };
+
   useEffect(() => {
     if (data?.count) {
       setFullNumberOfPages(roundNumberOfPages(data.count, 10));
-      setCurrentPageNumber(1);
+      // setCurrentPageNumber(1);
     }
   }, [data]);
 
@@ -57,7 +62,7 @@ const Books = () => {
         currentPageNumber={currentPageNumber}
         fullNumberOfPages={fullNumberOfPages}
         setCurrentPageNumber={setCurrentPageNumber}
-        setBookshelves={setBookshelves}
+        extendBookshelves={extendBookshelves}
         bookshelves={bookshelves}
         h={[
           "calc(100vh - 64px - 80px - 74px - 64px)",

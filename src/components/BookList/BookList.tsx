@@ -11,7 +11,7 @@ interface BooksListProps {
   fullNumberOfPages: number;
   setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
   bookshelves?: string[];
-  setBookshelves?: React.Dispatch<React.SetStateAction<string[]>>;
+  extendBookshelves?: (text: string) => void;
   disablePagination?: boolean;
   h?: string | string[];
 }
@@ -23,7 +23,7 @@ const BooksList = ({
   fullNumberOfPages,
   bookshelves,
   setCurrentPageNumber,
-  setBookshelves,
+  extendBookshelves,
   disablePagination,
   h,
 }: BooksListProps) => {
@@ -58,7 +58,7 @@ const BooksList = ({
             We are looking for books...
             <Spinner ml={4} size="md" />
           </Center>
-        ) : data?.results.length === 0 ? (
+        ) : data?.results?.length === 0 ? (
           <Text>We cannot find such books :(</Text>
         ) : (
           data?.results?.map((book) => (
@@ -67,7 +67,7 @@ const BooksList = ({
               isFavourite={favourites.some((favBook) => favBook.id === book.id)}
               bookshelves={bookshelves}
               setFavourites={setFavourites}
-              setBookshelves={setBookshelves}
+              extendBookshelves={extendBookshelves}
               book={book}
             />
           ))
